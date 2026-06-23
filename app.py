@@ -272,12 +272,16 @@ elif page == "about":
     st.markdown("---")
     st.subheader("How to Spot Phishing")
     st.success("Check the sender's email domain carefully\nHover over links to see the real URL\nBe suspicious of urgent language\nNever share passwords via email or phone\nContact organizations through official channels")
-    if st.button("Go to Pre-Test", type="primary", use_container_width=True):
-        if st.session_state.name:
+     if not st.session_state.name:
+         st.warning("Please enter your name on the Home page before starting the test.")
+         if st.button("Go to Home", type="primary", use_container_width=True):
+             st.session_state.page = "home"
+             st.rerun()
+            
+    else:
+        if st.button("Go to Pre-Test", type="primary", use_container_width=True):
             st.session_state.page = "pretest"
             st.rerun()
-        else:
-            st.warning("Please enter your name on the Home page first.")
 
 # ===== PRE-TEST =====
 elif page == "pretest":
