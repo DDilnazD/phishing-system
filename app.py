@@ -123,6 +123,7 @@ with st.sidebar:
         ("training.png", "Training",       "trainer"),
         ("posttest.png", "Post-Test",      "posttest"),
         ("results.png",  "Results",        "results"),
+        ("results.png", "All Results", "admin"),
     ]
 
     for icon, label, pg in nav_items:
@@ -523,3 +524,16 @@ elif page == "results":
             for k in list(st.session_state.keys()):
                 del st.session_state[k]
             st.rerun()
+elif page == "admin":
+    st.title("All Results")
+    try:
+        df = pd.read_csv("results.csv")
+        st.dataframe(df)
+        st.download_button(
+            "Download All Results",
+            df.to_csv(index=False),
+            "all_results.csv",
+            use_container_width=True
+        )
+    except:
+        st.warning("No results yet.")
