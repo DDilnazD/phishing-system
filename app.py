@@ -123,7 +123,7 @@ with st.sidebar:
         ("training.png", "Training",       "trainer"),
         ("posttest.png", "Post-Test",      "posttest"),
         ("results.png",  "Results",        "results"),
-        ("results.png", "All Results", "admin"),
+        ("results.png",  "All Results",    "admin"),
     ]
 
     for icon, label, pg in nav_items:
@@ -131,13 +131,12 @@ with st.sidebar:
         with col1:
             st.image(icon, width=22)
         with col2:
-            # Home and About always accessible
-            if pg in ["home", "about"]:
+            # Home, About, and All Results are always accessible — no name needed
+            if pg in ["home", "about", "admin"]:
                 if st.button(label, use_container_width=True, key=f"nav_{pg}"):
                     st.session_state.page = pg
                     st.rerun()
             else:
-                # Other pages need name
                 if st.session_state.name:
                     if st.button(label, use_container_width=True, key=f"nav_{pg}"):
                         st.session_state.page = pg
